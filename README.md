@@ -1,2 +1,2 @@
 # SENG300
-Test
+Authors: Jocelyn Donnelly
