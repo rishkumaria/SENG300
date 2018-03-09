@@ -1,2 +1,2 @@
 # SENG300
-Authors: Jocelyn Donnelly
+Authors: Jocelyn Donnelly, Rishabh Kumaria
