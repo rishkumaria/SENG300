@@ -1,5 +1,9 @@
 
 Methods needed:
+verifyinput
+(Maybe these should be classes)
+declarationcounter, should return an int
+referencecounter, should return an int
 
 
 Diagram progress:
