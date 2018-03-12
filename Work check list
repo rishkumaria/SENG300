@@ -1,11 +1,12 @@
 
 Methods needed:
 verifyinput, throws IllegalStateException ✓
-getfiles, ? 
 
-seperate class: filechecker:
-      declarationcounter, should return an int
-      referencecounter, should return an int
+
+seperate class: 
+      directoryhandler
+      declarationcounter, getcount() int
+      referencecounter, getcount() int
 
 
 Diagram progress:
