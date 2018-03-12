@@ -16,18 +16,22 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 public class JavaASTTest
 {
-	public static String CheckFile (File filePath) throws FileNotFoundException, IOException
+	//check if file is a java file
+	public static void CheckFile (File file) throws FileNotFoundException, IOException
 	{
-		BufferedReader br = new BufferedReader(new FileReader(filePath));
-		StringBuilder sb = new StringBuilder();
-		String line = br.readLine();
-		while (line != null)
-		{
-			sb.append(line);
-			sb.append(System.lineSeparator());
-			line = br.readLine();
+		String wanted="java";
+		String fileName = file.getName();
+		//System.out.println(fileName);
+		String extension = "";
+
+		int i = fileName.lastIndexOf('.');
+		if (i > 0) {
+		    extension = fileName.substring(i+1);
+		if (extension.equals(wanted)) {
+			System.out.println(fileName);
 		}
-		return sb.toString();
+		}
+		return;
 	}
 	
 	
@@ -49,22 +53,13 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
     return;
 }
 
-	public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
-, IllegalStateException{
-	if (!(directory.isDirectory())) {
-		throw new IllegalStateException("Path specified not a directory");
-	}
-	}
-
 	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
 		verifyinput(args); 
 		File directory = new File(args[0]);
 		DirectoryHandler(directory);
-		String filePath = "Point.java";
-		ASTParser parser = ASTParser.newParser(AST.JLS8);
-		char[] fileContent = getFileContent(filePath).toCharArray();
-		parser.setSource(fileContent);
+		//ASTParser parser = ASTParser.newParser(AST.JLS8);
+		/*parser.setSource(fileContent);
 		CompilationUnit cu = (CompilationUnit) parser.createAST(null);
 
 		cu.accept(new ASTVisitor()
@@ -82,8 +77,8 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 				return false;
 
 			}
-		});
-	}
+		}); */
+	} 
 	
 	
 	//Ensure user entered correct number of command line arguments
