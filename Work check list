@@ -1,9 +1,11 @@
 
 Methods needed:
-verifyinput, throws IllegalStateException
-directoryopened, return boolean
-declarationcounter, should return an int
-referencecounter, should return an int
+verifyinput, throws IllegalStateException ✓
+getfiles, ? 
+
+seperate class: filechecker:
+      declarationcounter, should return an int
+      referencecounter, should return an int
 
 
 Diagram progress:
