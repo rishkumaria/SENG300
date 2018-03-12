@@ -18,15 +18,17 @@ public class JavaASTTest
 {
 	//check if file is a java file
 	public static void CheckFile (File file) throws FileNotFoundException, IOException
-	{
+	{       //Extension desired is .java
 		String wanted="java";
+		//get the name of the file
 		String fileName = file.getName();
-		//System.out.println(fileName);
+		//check type
 		String extension = "";
 
 		int i = fileName.lastIndexOf('.');
 		if (i > 0) {
 		    extension = fileName.substring(i+1);
+			//if type wanted ....
 		if (extension.equals(wanted)) {
 			System.out.println(fileName); //filler just testing, maybe call parser here
 		}
