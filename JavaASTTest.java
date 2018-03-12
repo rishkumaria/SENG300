@@ -16,7 +16,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 public class JavaASTTest
 {
-	public static String getFileContent (String filePath) throws FileNotFoundException, IOException
+	public static String CheckFile (File filePath) throws FileNotFoundException, IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		StringBuilder sb = new StringBuilder();
@@ -36,7 +36,17 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 	if (!(directory.isDirectory())) {
 		throw new IllegalStateException("Path specified not a directory");
 	}
-	
+	//get all the files from a directory
+    File[] fileList = directory.listFiles();
+    for (File file : fileList){
+        if (file.isFile()){
+        	CheckFile(file);
+        }
+        else if (file.isDirectory()) {
+        	DirectoryHandler(file);
+        }
+    }
+    return;
 }
 
 
