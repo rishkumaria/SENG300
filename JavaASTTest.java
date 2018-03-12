@@ -28,7 +28,7 @@ public class JavaASTTest
 		if (i > 0) {
 		    extension = fileName.substring(i+1);
 		if (extension.equals(wanted)) {
-			System.out.println(fileName);
+			System.out.println(fileName); //filler just testing, maybe call parser here
 		}
 		}
 		return;
