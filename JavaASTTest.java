@@ -29,10 +29,18 @@ public class JavaASTTest
 		return sb.toString();
 	}
 
+	public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
+, IllegalStateException{
+	if (!(directory.isDirectory())) {
+		throw new IllegalStateException("Path specified not a directory");
+	}
+	}
 
 	public static void main(String[] args)
 	{
 		verifyinput(args); 
+		File directory = new File(args[0]);
+		DirectoryHandler(directory);
 		String filePath = "Point.java";
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
 		char[] fileContent = getFileContent(filePath).toCharArray();
