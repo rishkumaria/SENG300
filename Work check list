@@ -1,7 +1,8 @@
 
 Methods needed:
-verifyinput
-(Maybe these should be classes)
+verifyinput, return boolean
+directoryopened, return boolean
+findjavaclasses: return array
 declarationcounter, should return an int
 referencecounter, should return an int
 
