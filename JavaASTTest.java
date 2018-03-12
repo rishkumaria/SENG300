@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -8,14 +9,14 @@ import java.util.Set;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.CompilationUnit;
+import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 
 
 public class JavaASTTest
 {
-	public static String getFileContent (String filePath) throws FilNotFoundException, IOException
+	public static String getFileContent (String filePath) throws FileNotFoundException, IOException
 	{
 		BufferedReader br = new BufferedReader(new FileReader(filePath));
 		StringBuilder sb = new StringBuilder();
@@ -28,11 +29,22 @@ public class JavaASTTest
 		}
 		return sb.toString();
 	}
+	
+	
+public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
+, IllegalStateException{
+	if (!(directory.isDirectory())) {
+		throw new IllegalStateException("Path specified not a directory");
+	}
+	
+}
 
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
 		verifyinput(args); 
+		File directory = new File(args[0]);
+		DirectoryHandler(directory);
 		String filePath = "Point.java";
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
 		char[] fileContent = getFileContent(filePath).toCharArray();

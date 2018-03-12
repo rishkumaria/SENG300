@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.osgi-3.12.50.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.jdt.core-3.13.0.v20170516-1929.jar" sourcepath="C:/Users/Jocelyn/Downloads/org.eclipse.jdt.core-3.13.0.v20170516-1929.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.core.resources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.equinox.common-3.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.core.runtime-3.13.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.core.contenttype-3.6.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.equinox.preferences-3.7.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Jocelyn/Downloads/org.eclipse.text_3.5.0.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
