@@ -1,6 +1,6 @@
 
 Methods needed:
-verifyinput, return boolean
+verifyinput, throws IllegalStateException
 directoryopened, return boolean
 findjavaclasses: return array
 declarationcounter, should return an int
