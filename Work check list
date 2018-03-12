@@ -2,7 +2,6 @@
 Methods needed:
 verifyinput, throws IllegalStateException
 directoryopened, return boolean
-findjavaclasses: return array
 declarationcounter, should return an int
 referencecounter, should return an int
 
