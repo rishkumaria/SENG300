@@ -49,6 +49,12 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
     return;
 }
 
+	public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
+, IllegalStateException{
+	if (!(directory.isDirectory())) {
+		throw new IllegalStateException("Path specified not a directory");
+	}
+	}
 
 	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
