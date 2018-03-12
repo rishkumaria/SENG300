@@ -32,7 +32,7 @@ public class JavaASTTest
 
 	public static void main(String[] args)
 	{
-		verifyinput(args);
+		verifyinput(args); 
 		String filePath = "Point.java";
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
 		char[] fileContent = getFileContent(filePath).toCharArray();
@@ -58,7 +58,7 @@ public class JavaASTTest
 	}
 	
 	
-	
+	//Ensure user entered correct number of command line arguments
 	private static void verifyinput(String[] args)throws IllegalStateException{
 	   if (args.length!=2) {
 	     throw new IllegalStateException("Usage: 'Program name' 'Directoy Path' 'Fully qualified java type'");
