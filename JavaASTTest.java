@@ -32,6 +32,7 @@ public class JavaASTTest
 
 	public static void main(String[] args)
 	{
+		verifyinput(args);
 		String filePath = "Point.java";
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
 		char[] fileContent = getFileContent(filePath).toCharArray();
@@ -55,6 +56,15 @@ public class JavaASTTest
 			}
 		});
 	}
+	
+	
+	
+	private static void verifyinput(String[] args)throws IllegalStateException{
+	   if (args.length!=2) {
+	     throw new IllegalStateException("Usage: 'Program name' 'Directoy Path' 'Fully qualified java type'");
+	   }
+	   return;
+	   }
 }
 
 
