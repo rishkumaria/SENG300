@@ -18,6 +18,7 @@ import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
 import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 
+
 public class JavaASTTest
 {
 	//check if file is a java file
@@ -36,6 +37,7 @@ public class JavaASTTest
 		if (extension.equals(wanted)) {
 			System.out.println(fileName); //filler just testing, maybe call parser here
 			String str = getFileContent(file);
+			CompilationUnit cu=parse(str);
 		}
 		}
 		return;
@@ -60,7 +62,7 @@ public class JavaASTTest
 public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
 , IllegalStateException{
 	if (!(directory.isDirectory())) {
-		throw new IllegalStateException("Path specified not a directory");
+		throw new IllegalStateException("Path specified is not a directory");
 	}
 	//get all the files from a directory
     File[] fileList = directory.listFiles();
@@ -77,26 +79,6 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 		verifyinput(args); 
 		File directory = new File(args[0]);
 		DirectoryHandler(directory);
-		//ASTParser parser = ASTParser.newParser(AST.JLS8);
-		/*parser.setSource(fileContent);
-		CompilationUnit cu = (CompilationUnit) parser.createAST(null);
-
-		cu.accept(new ASTVisitor()
-		{
-			Set names = new HashSet();
-
-			public boolean visit(VariableDeclarationFragment node) 			//change this to type Java.lang.string
-			{
-				SimpleName name = node.getName();
-				int lineNumber = cu.getLineNumber(name.getStartPosition());
-
-				System.out.println("Name: " + name.toString());
-				System.out.println("Line: " + lineNumber);
-				System.out.println("----------------------------");
-				return false;
-
-			}
-		}); */
 	} 
 	
 	
@@ -112,12 +94,13 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 	
 	public static CompilationUnit parse(String file) 
 	{
-		ASTParser parser = ASTParser.newParser(AST.JLS8); 
-		parser.setKind(ASTParser.K_COMPILATION_UNIT);
-		parser.setSource(file.toCharArray()); // set source
-		parser.setResolveBindings(true); // we need bindings later on 
-		CompilationUnit result = (CompilationUnit) parser.createAST(null);
-		return result;
+	    ASTParser parser = ASTParser.newParser(AST.JLS8);
+
+	    parser.setKind(ASTParser.K_COMPILATION_UNIT);
+	    parser.setSource(file.toCharArray());
+
+	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
+	    return cu;
 	}
 
 
