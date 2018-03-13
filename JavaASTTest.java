@@ -1,186 +1,97 @@
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.eclipse.jdt.core.dom.*;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.jdt.core.ICompilationUnit;
-import org.eclipse.jdt.core.dom.AST;
-import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
-import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
-import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
+public class JavaASTTest {
+	public File[] javaFiles;
+	private String type;
+	public String typeSimple;
+	public int dec;
+	public int ref;
 
-
-public class JavaASTTest
-{
-	//check if file is a java file
-	public static void CheckFile (File file) throws FileNotFoundException, IOException
-	{       //Extension desired is .java
-		String wanted="java";
-		//get the name of the file
-		String fileName = file.getName();
-		//check type
-		String extension = "";
-
-		int i = fileName.lastIndexOf('.');
-		if (i > 0) {
-		    extension = fileName.substring(i+1);
-			//if type wanted ....
-		if (extension.equals(wanted)) {
-			System.out.println(fileName); //filler just testing, maybe call parser here
-			String str = getFileContent(file);
-		}
-		}
+	public static void main(String[] args) {
+		
+		
+		
+		JavaASTTest ASTTest = new JavaASTTest(args[0], args[1]);
+	
+		
+		
+			String sourceCode="public class A { int A;  \\n b = 2; \\n ArrayList<Integer> al = new ArrayList<Integer>(); int j=1000; int i = 10;}";
+			// if contents successfully read then parse the contents
+			ASTTest.parse(sourceCode);
+		
+		
+		// print result
+		ASTTest.printResult();
+		
 		return;
 	}
 	
-	public static String getFileContent (File file) throws FileNotFoundException, IOException
-		{
-			BufferedReader br = new BufferedReader(new FileReader(file));
-     		StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null)
-			{
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			br.close();
-			return sb.toString();
+	/**
+	 * 
+	 * Takes pathName and typeName 
+	 * then initializes global variables
+	 */
+	public JavaASTTest(String pathName, String typeName) {
+		
+		type = typeName;
+		dec = 0;
+		ref = 0;
+		
+		String[] types = type.split("\\.");
+		if (types.length >= 1) {
+			typeSimple = types[types.length-1];
+		} else {
+			typeSimple = type;
 		}
-	
-	
-public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
-, IllegalStateException{
-	if (!(directory.isDirectory())) {
-		throw new IllegalStateException("Path specified not a directory");
 	}
-	//get all the files from a directory
-    File[] fileList = directory.listFiles();
-    for (File file : fileList){
-        if (file.isFile()){
-        	CheckFile(file);
-        }
-    }
-    return;
-}
+	
+	
+	
+	/**
+	 * Parses given source code and increments dec and ref if necessary.
+	 */
+	@SuppressWarnings("deprecation")
+	public void parse(String sourceCode) {
+		ASTParser parser = ASTParser.newParser(AST.JLS8);
 
-	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
-	{
-		verifyinput(args); 
-		File directory = new File(args[0]);
-		DirectoryHandler(directory);
-		//ASTParser parser = ASTParser.newParser(AST.JLS8);
-		/*parser.setSource(fileContent);
+		parser.setKind(ASTParser.K_COMPILATION_UNIT);
+		parser.setSource(sourceCode.toCharArray());
+
 		CompilationUnit cu = (CompilationUnit) parser.createAST(null);
 
-		cu.accept(new ASTVisitor()
-		{
-			Set names = new HashSet();
-
-			public boolean visit(VariableDeclarationFragment node) 			//change this to type Java.lang.string
-			{
-				SimpleName name = node.getName();
-				int lineNumber = cu.getLineNumber(name.getStartPosition());
-
-				System.out.println("Name: " + name.toString());
-				System.out.println("Line: " + lineNumber);
-				System.out.println("----------------------------");
-				return false;
-
-			}
-		}); */
-	} 
-	
-	
-	//Ensure user entered correct number of command line arguments
-	//throws IllegalStateException if there are not two arguments
-	private static void verifyinput(String[] args)throws IllegalStateException{
-	   if (args.length!=2) {
-	     throw new IllegalStateException("Usage: 'Program name' 'Directoy Path' 'Fully qualified java type'");
-	   }
-	   return;
-	   }
-	
-	
-	public static CompilationUnit parse(String file) 
-	{
-		ASTParser parser = ASTParser.newParser(AST.JLS8); 
-		parser.setKind(ASTParser.K_COMPILATION_UNIT);
-		parser.setSource(file.toCharArray()); // set source
-		parser.setResolveBindings(true); // we need bindings later on 
-		CompilationUnit result = (CompilationUnit) parser.createAST(null);
-		return result;
-	}
-
-
-
-
-	public int declarationCounter(AST ast)
-	{	int count=0;
-		
-		
-		
-	   return count;
-	}
-
-	public boolean visit(VariableDeclarationStatement node) 
-	{
-		for (Iterator iter = node.fragments().iterator(); iter.hasNext();) {
-			VariableDeclarationFragment fragment = (VariableDeclarationFragment) iter.next();
-			// ... store these fragments somewhere
-		}
-		return false; // prevent that SimpleName is interpreted as reference
-	}
-	
-	public class VariableCounter
-	{
-		public static void variableparse(char[] str) 
-		{
-			ASTParser parser = ASTParser.newParser(AST.JLS8);
-			parser.setSource(str);
-			parser.setKind(ASTParser.K_COMPILATION_UNIT);
-
-			CompilationUnit cu = (CompilationUnit) parser.createAST(null);
- 
-			cu.accept(new ASTVisitor() 
-			{
- 				public boolean visit(VariableDeclarationFragment node) 
-				{
-					SimpleName name = node.getName();
-
-					System.out.println(name + " Declaration count: " );
-					return false;
+		cu.accept(new ASTVisitor() {
+			// Count Declarations
+			public boolean visit(TypeDeclaration node) {
+				String qualifiedName = node.getName().getFullyQualifiedName();
+				
+				if (typeSimple.equals(qualifiedName)) {
+					dec++;
 				}
-			});
-		}
- 
-		public static void main(String[] args) throws IOException 
-		{
-			String test1 = "public class A { int a;  \n int b = 2; \n ArrayList<Integer> al = new ArrayList<Integer>(); j=1000; i = 10;}";
-			char[] test = test1.toCharArray();
-			variableparse(test);
-		}
+				return true;
+			}
+			
+			// Count References
+			public boolean 	visit(FieldDeclaration node) {
+				String qualifiedName = node.getType().toString();
+				
+				if (typeSimple.equals(qualifiedName)) {
+					ref++;
+				}
+				return true;
+			}
+		});
 	}
-
 	
+	/**
+	 * 
+	 * Prints the output string
+	 */
+	public void printResult() {
+		System.out.println(type + "; Declarations found: " + dec + "; References found: " + ref + ".");
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
