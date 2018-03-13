@@ -41,6 +41,9 @@ public class TypeCounter
 	    parser.setBindingsRecovery(true);
 		Map options = JavaCore.getOptions();
 		parser.setCompilerOptions(options);
+		String path=args[0];
+		String [] patharray= {path};
+		parser.setEnvironment(patharray, patharray, null, false);
 	     //check files in directory
 		if (!(directory.isDirectory())) {
 			throw new IllegalStateException("Path specified is not a directory");
@@ -57,15 +60,10 @@ public class TypeCounter
 		        if (isjavafile)
 		        {
 		        	String filename= file.getName();
-		        	parser.setUnitName(filename);
+		        	parser.setUnitName(args[0]);
 		        	String strfile;
 		        	strfile=fhandle.getFileContent(file);
-		        	parser.setSource(strfile.toCharArray());
-		        	String filepath= fhandle.getFilePath(args[0], file);
-		        	String [] patharray= {filepath};
-		        	String classpath= args[0];
-		        	String [] arrayclasspath= {classpath};
-		        	//parser.setEnvironment(arrayclasspath, patharray, null, false); Can't get this to work :(
+		        	parser.setSource(strfile.toCharArray()); 
 		    	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
 		    	    dcounter.updateCounter(cu, type);
 		    	    rcounter.updateCounter(cu, type);

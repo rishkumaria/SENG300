@@ -48,11 +48,4 @@ public String getFileContent (File file) throws FileNotFoundException, IOExcepti
 	return sb.toString();
 }
 
-
-public String getFilePath( String directorypath, File file) {
-	String filename= file.getName();
-	String filepath= directorypath + "\\" + filename;
-	return filepath;
-	 }
-
 }
