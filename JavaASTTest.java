@@ -1,3 +1,13 @@
+/**
+* SENG 300 Iteration 1 
+* @author Rishabh Kumaria, Nathan Ou, Jocelyn Donnelly 
+* Version 1.0
+* 
+*/
+
+
+
+
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
@@ -27,6 +37,12 @@ public class JavaASTTest {
 		
 		// print result
 		ASTTest.printResult();
+		String a = "abc";
+		int i = 20;
+		float f = 20.2f;
+		System.out.println(((Object)i).getClass().getName());
+		System.out.println(((Object)f).getClass().getName());
+		System.out.println(a.getClass().getName());
 		
 		return;
 	}
