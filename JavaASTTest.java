@@ -140,7 +140,38 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 		return false; // prevent that SimpleName is interpreted as reference
 	}
 	
+	public class VariableCounter
+	{
+		public static void variableparse(char[] str) 
+		{
+			ASTParser parser = ASTParser.newParser(AST.JLS8);
+			parser.setSource(str);
+			parser.setKind(ASTParser.K_COMPILATION_UNIT);
+
+			CompilationUnit cu = (CompilationUnit) parser.createAST(null);
+ 
+			cu.accept(new ASTVisitor() 
+			{
+ 				public boolean visit(VariableDeclarationFragment node) 
+				{
+					SimpleName name = node.getName();
+
+					System.out.println(name + " Declaration count: " );
+					return false;
+				}
+			});
+		}
+ 
+		public static void main(String[] args) throws IOException 
+		{
+			char[] test = "public class A { int a;  \n int b = 2; \n ArrayList<Integer> al = new ArrayList<Integer>(); j=1000; i = 10;}"
+			variableparse(test);
+		}
+	}
+
+	
 }
+
 
 
 
