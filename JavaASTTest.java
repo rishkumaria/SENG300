@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
@@ -34,10 +35,26 @@ public class JavaASTTest
 			//if type wanted ....
 		if (extension.equals(wanted)) {
 			System.out.println(fileName); //filler just testing, maybe call parser here
+			String str = getFileContent(file);
 		}
 		}
 		return;
 	}
+	
+	public static String getFileContent (File file) throws FileNotFoundException, IOException
+		{
+			BufferedReader br = new BufferedReader(new FileReader(file));
+     		StringBuilder sb = new StringBuilder();
+			String line = br.readLine();
+			while (line != null)
+			{
+				sb.append(line);
+				sb.append(System.lineSeparator());
+				line = br.readLine();
+			}
+			br.close();
+			return sb.toString();
+		}
 	
 	
 public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
@@ -93,14 +110,14 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 	   }
 	
 	
-	public CompilationUnit parse(ICompilationUnit unit) 
+	public static CompilationUnit parse(String file) 
 	{
 		ASTParser parser = ASTParser.newParser(AST.JLS8); 
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
-		parser.setSource(unit); // set source
+		parser.setSource(file.toCharArray()); // set source
 		parser.setResolveBindings(true); // we need bindings later on 
-		 CompilationUnit result = (CompilationUnit) parser.createAST(null);
-		 return result;
+		CompilationUnit result = (CompilationUnit) parser.createAST(null);
+		return result;
 	}
 
 
