@@ -26,7 +26,6 @@ public class FileHandler {
 		    extension = fileName.substring(i+1);
 			//if type wanted ....
 		if (extension.equals(wanted)) {
-			System.out.println(fileName); //filler just testing, maybe call parser here
 			return true;
 		}
 		}
