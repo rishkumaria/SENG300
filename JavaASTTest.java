@@ -4,14 +4,17 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
 import org.eclipse.jdt.core.dom.SimpleName;
 import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
+import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 
 public class JavaASTTest
@@ -92,23 +95,23 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 	
 	public CompilationUnit parse(ICompilationUnit unit) 
 	{
-		ASTParser parser = ASTParser.newParser(AST.JLS3); 
+		ASTParser parser = ASTParser.newParser(AST.JLS8); 
 		parser.setKind(ASTParser.K_COMPILATION_UNIT);
 		parser.setSource(unit); // set source
-		parser.setResolveBindings(true); // we need bindings later on
-		return (CompilationUnit) 
-		parser.createAST(null /* IProgressMonitor */); // parse
+		parser.setResolveBindings(true); // we need bindings later on 
+		 CompilationUnit result = (CompilationUnit) parser.createAST(null);
+		 return result;
 	}
 
 
 
 
-	public int declarationCounter(AST)
-	{	
+	public int declarationCounter(AST ast)
+	{	int count=0;
 		
 		
 		
-		
+	   return count;
 	}
 
 	public boolean visit(VariableDeclarationStatement node) 
