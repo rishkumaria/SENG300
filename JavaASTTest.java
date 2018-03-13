@@ -88,6 +88,38 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
 	   }
 	   return;
 	   }
+	
+	
+	public CompilationUnit parse(ICompilationUnit unit) 
+	{
+		ASTParser parser = ASTParser.newParser(AST.JLS3); 
+		parser.setKind(ASTParser.K_COMPILATION_UNIT);
+		parser.setSource(unit); // set source
+		parser.setResolveBindings(true); // we need bindings later on
+		return (CompilationUnit) 
+		parser.createAST(null /* IProgressMonitor */); // parse
+	}
+
+
+
+
+	public int declarationCounter(AST)
+	{	
+		
+		
+		
+		
+	}
+
+	public boolean visit(VariableDeclarationStatement node) 
+	{
+		for (Iterator iter = node.fragments().iterator(); iter.hasNext();) {
+			VariableDeclarationFragment fragment = (VariableDeclarationFragment) iter.next();
+			// ... store these fragments somewhere
+		}
+		return false; // prevent that SimpleName is interpreted as reference
+	}
+	
 }
 
 
