@@ -4,3 +4,5 @@
 /TypeCounter.class
 /DirectoryHandler.class
 /FileHandler.class
+/DeclarationCounter.class
+/ReferenceCounter.class

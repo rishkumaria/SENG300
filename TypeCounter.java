@@ -5,10 +5,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.jdt.core.ICompilationUnit;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.ASTVisitor;
@@ -22,12 +24,18 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 public class TypeCounter
 {
 	
-
-
 	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
 		verifyinput(args); 
 		File directory = new File(args[0]);
+		//create a parser
+		ASTParser parser = ASTParser.newParser(AST.JLS8);
+	    parser.setKind(ASTParser.K_COMPILATION_UNIT);
+	    parser.setResolveBindings(true);
+	    parser.setBindingsRecovery(true);
+		Map options = JavaCore.getOptions();
+		parser.setCompilerOptions(options);
+	     //check files in directory
 		if (!(directory.isDirectory())) {
 			throw new IllegalStateException("Path specified is not a directory");
 		}
@@ -42,15 +50,27 @@ public class TypeCounter
 		        isjavafile=fhandle.CheckFile(file);
 		        if (isjavafile)
 		        {
-		        	fhandle.getFileContent(file);
+		        	String filename= file.getName();
+		        	parser.setUnitName(filename);
+		        	String strfile;
+		        	strfile=fhandle.getFileContent(file);
+		        	parser.setSource(strfile.toCharArray());
+		        	String filepath= fhandle.getFilePath(args[0], file);
+		        	String [] patharray= {filepath};
+		        	String classpath= args[0];
+		        	String [] arrayclasspath= {classpath};
+		        	//parser.setEnvironment(arrayclasspath, patharray, null, false);
+		    	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
+		    	    if (cu.getAST().hasBindingsRecovery()) {
+		    			System.out.println("Binding activated.");
+		    		}
 		        }
 		       }
 		   }
 		  
 	}
 	
-	
-	
+		
 	//Ensure user entered correct number of command line arguments
 	//throws IllegalStateException if there are not two arguments
 	private static void verifyinput(String[] args)throws IllegalStateException{
@@ -60,37 +80,6 @@ public class TypeCounter
 	   return;
 	   }
 	
-	
-	public static CompilationUnit parse(String file) 
-	{
-	    ASTParser parser = ASTParser.newParser(AST.JLS8);
-
-	    parser.setKind(ASTParser.K_COMPILATION_UNIT);
-	    parser.setSource(file.toCharArray());
-
-	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
-	    return cu;
-	}
-
-
-
-
-	public int declarationCounter(AST ast)
-	{	int count=0;
-		
-		
-		
-	   return count;
-	}
-
-	public boolean visit(VariableDeclarationStatement node) 
-	{
-		for (Iterator iter = node.fragments().iterator(); iter.hasNext();) {
-			VariableDeclarationFragment fragment = (VariableDeclarationFragment) iter.next();
-			// ... store these fragments somewhere
-		}
-		return false; // prevent that SimpleName is interpreted as reference
-	}
 	
 }
 

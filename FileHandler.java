@@ -37,7 +37,7 @@ public class FileHandler {
 public String getFileContent (File file) throws FileNotFoundException, IOException
 {
 	BufferedReader br = new BufferedReader(new FileReader(file));
-		StringBuilder sb = new StringBuilder();
+	StringBuilder sb = new StringBuilder();
 	String line = br.readLine();
 	while (line != null)
 	{
@@ -48,4 +48,12 @@ public String getFileContent (File file) throws FileNotFoundException, IOExcepti
 	br.close();
 	return sb.toString();
 }
+
+
+public String getFilePath( String directorypath, File file) {
+	String filename= file.getName();
+	String filepath= directorypath + "\\" + filename;
+	return filepath;
+	 }
+
 }
