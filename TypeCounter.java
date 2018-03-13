@@ -67,13 +67,16 @@ public class TypeCounter
 		        	String [] arrayclasspath= {classpath};
 		        	//parser.setEnvironment(arrayclasspath, patharray, null, false); Can't get this to work :(
 		    	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
-		    	    
-		    	    if (cu.getAST().hasBindingsRecovery()) {
-		    			System.out.println("Binding activated.");
+		    	    dcounter.updateCounter(cu, type);
+		    	    rcounter.updateCounter(cu, type);
 		    		}
 		        }
-		       }
-		   }
+		       } 
+		   //outside for loop
+		   int dcount=dcounter.getCount();
+		   int rcount=rcounter.getcount();
+		   System.out.println(type + "; Declarations found: " + dcount + "; References found: " + rcount + ".");
+		   
 		  
 	}
 	
