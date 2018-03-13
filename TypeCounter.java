@@ -19,67 +19,36 @@ import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
 
 
 
-public class JavaASTTest
+public class TypeCounter
 {
-	//check if file is a java file
-	public static void CheckFile (File file) throws FileNotFoundException, IOException
-	{       //Extension desired is .java
-		String wanted="java";
-		//get the name of the file
-		String fileName = file.getName();
-		//check type
-		String extension = "";
+	
 
-		int i = fileName.lastIndexOf('.');
-		if (i > 0) {
-		    extension = fileName.substring(i+1);
-			//if type wanted ....
-		if (extension.equals(wanted)) {
-			System.out.println(fileName); //filler just testing, maybe call parser here
-			String str = getFileContent(file);
-			CompilationUnit cu=parse(str);
-		}
-		}
-		return;
-	}
-	
-	public static String getFileContent (File file) throws FileNotFoundException, IOException
-		{
-			BufferedReader br = new BufferedReader(new FileReader(file));
-     		StringBuilder sb = new StringBuilder();
-			String line = br.readLine();
-			while (line != null)
-			{
-				sb.append(line);
-				sb.append(System.lineSeparator());
-				line = br.readLine();
-			}
-			br.close();
-			return sb.toString();
-		}
-	
-	
-public static  void DirectoryHandler(File directory) throws FileNotFoundException, IOException
-, IllegalStateException{
-	if (!(directory.isDirectory())) {
-		throw new IllegalStateException("Path specified is not a directory");
-	}
-	//get all the files from a directory
-    File[] fileList = directory.listFiles();
-    for (File file : fileList){
-        if (file.isFile()){
-        	CheckFile(file);
-        }
-    }
-    return;
-}
 
 	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
 		verifyinput(args); 
 		File directory = new File(args[0]);
-		DirectoryHandler(directory);
-	} 
+		if (!(directory.isDirectory())) {
+			throw new IllegalStateException("Path specified is not a directory");
+		}
+		//get all the files from a directory
+		   File[] fileList = directory.listFiles();
+		   //instantiate file checker
+		   //find java files and parse
+		   FileHandler fhandle=new FileHandler();
+		   for (File file : fileList){
+		       if (file.isFile()){
+		    	boolean isjavafile;
+		        isjavafile=fhandle.CheckFile(file);
+		        if (isjavafile)
+		        {
+		        	fhandle.getFileContent(file);
+		        }
+		       }
+		   }
+		  
+	}
+	
 	
 	
 	//Ensure user entered correct number of command line arguments
