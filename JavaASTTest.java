@@ -164,7 +164,8 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
  
 		public static void main(String[] args) throws IOException 
 		{
-			char[] test = "public class A { int a;  \n int b = 2; \n ArrayList<Integer> al = new ArrayList<Integer>(); j=1000; i = 10;}"
+			String test1 = "public class A { int a;  \n int b = 2; \n ArrayList<Integer> al = new ArrayList<Integer>(); j=1000; i = 10;}";
+			char[] test = test1.toCharArray();
 			variableparse(test);
 		}
 	}
