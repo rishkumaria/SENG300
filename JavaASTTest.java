@@ -48,9 +48,6 @@ public static  void DirectoryHandler(File directory) throws FileNotFoundExceptio
         if (file.isFile()){
         	CheckFile(file);
         }
-        else if (file.isDirectory()) {
-        	DirectoryHandler(file);
-        }
     }
     return;
 }
