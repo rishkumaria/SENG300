@@ -26,7 +26,13 @@ public class TypeCounter
 	
 	public static void main(String[] args) throws FileNotFoundException, IllegalStateException, IOException
 	{
+		//Check number of inputs 
 		verifyinput(args); 
+		//intialize counters 
+		DeclarationCounter dcounter=new DeclarationCounter();
+		ReferenceCounter rcounter=new ReferenceCounter();
+		//store command line arguments
+		String type= args[1];
 		File directory = new File(args[0]);
 		//create a parser
 		ASTParser parser = ASTParser.newParser(AST.JLS8);
@@ -59,8 +65,9 @@ public class TypeCounter
 		        	String [] patharray= {filepath};
 		        	String classpath= args[0];
 		        	String [] arrayclasspath= {classpath};
-		        	//parser.setEnvironment(arrayclasspath, patharray, null, false);
+		        	//parser.setEnvironment(arrayclasspath, patharray, null, false); Can't get this to work :(
 		    	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
+		    	    
 		    	    if (cu.getAST().hasBindingsRecovery()) {
 		    			System.out.println("Binding activated.");
 		    		}
