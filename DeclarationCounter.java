@@ -17,7 +17,6 @@ public class DeclarationCounter {
 			public boolean visit(TypeDeclaration node) {
 				node.resolveBinding();
 				String qualifiedName = node.getName().getFullyQualifiedName();
-				
 				if (type.equals(qualifiedName)) {
 					count++;
 				}

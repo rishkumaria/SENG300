@@ -1,24 +1,11 @@
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
-
-import org.eclipse.core.resources.IFile;
-import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
-import org.eclipse.jdt.core.dom.ASTVisitor;
 import org.eclipse.jdt.core.dom.CompilationUnit;
-import org.eclipse.jdt.core.dom.SimpleName;
-import org.eclipse.jdt.core.dom.VariableDeclarationFragment;
-import org.eclipse.jdt.core.dom.VariableDeclarationStatement;
-
 
 
 public class TypeCounter
@@ -59,7 +46,6 @@ public class TypeCounter
 		        isjavafile=fhandle.CheckFile(file);
 		        if (isjavafile)
 		        {
-		        	String filename= file.getName();
 		        	parser.setUnitName(args[0]);
 		        	String strfile;
 		        	strfile=fhandle.getFileContent(file);
@@ -90,14 +76,3 @@ public class TypeCounter
 	
 	
 }
-
-
-
-
-
-
-
-
-
-
-
