@@ -73,7 +73,7 @@ public class TypeCounter
 	//throws IllegalStateException if there are not two arguments
 	private static void verifyinput(String[] args)throws IllegalStateException{
 	   if (args.length!=2) {
-	     throw new IllegalStateException("Usage: 'Program name' 'Directoy Path' 'Fully qualified java type'");
+	     throw new IllegalStateException("Usage: 'Program name' 'Directory Path' 'Fully qualified java type'");
 	   }
 	   return;
 	   }
