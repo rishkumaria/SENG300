@@ -15,6 +15,7 @@ public class DeclarationCounter {
 		cu.accept(new ASTVisitor() {
 			// Count Declarations
 			public boolean visit(TypeDeclaration node) {
+				node.resolveBinding();
 				String qualifiedName = node.getName().getFullyQualifiedName();
 				
 				if (type.equals(qualifiedName)) {

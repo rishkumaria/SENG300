@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
-import org.eclipse.jdt.core.dom.CompilationUnit;
 
 
 public class FileHandler {
