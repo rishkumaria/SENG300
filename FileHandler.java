@@ -12,7 +12,7 @@ public class FileHandler {
 
 
 //check if file is a java file
-	public static boolean CheckFile (File file) throws FileNotFoundException, IOException
+	public boolean CheckFile (File file) throws FileNotFoundException, IOException
 	{       //Extension desired is .java
 		String wanted="java";
 		//get the name of the file
