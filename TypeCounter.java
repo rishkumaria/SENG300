@@ -48,17 +48,21 @@ public class TypeCounter
 		        {
 		        	parser.setUnitName(args[0]);
 		        	String strfile;
+		        	//turn file to a string
 		        	strfile=fhandle.getFileContent(file);
+		        	//parse
 		        	parser.setSource(strfile.toCharArray()); 
 		    	    CompilationUnit cu = (CompilationUnit)parser.createAST(null);
+		    	    //count declarations
 		    	    dcounter.updateCounter(cu, type);
+		    	    //count references
 		    	    rcounter.updateCounter(cu, type);
 		    		}
 		        }
 		       } 
 		   //outside for loop
-		   int dcount=dcounter.getCount();
-		   int rcount=rcounter.getcount();
+		   int dcount=dcounter.getCount(); //get the final declaration count
+		   int rcount=rcounter.getcount(); //get the final reference count 
 		   System.out.println(type + "; Declarations found: " + dcount + "; References found: " + rcount + ".");
 		   
 		  

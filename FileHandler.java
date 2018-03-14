@@ -23,28 +23,29 @@ public class FileHandler {
 		int i = fileName.lastIndexOf('.');
 		if (i > 0) {
 		    extension = fileName.substring(i+1);
-			//if type wanted ....
+			//if type wanted return true
 		if (extension.equals(wanted)) {
 			return true;
 		}
 		}
-		return false ;
+		return false ; //else return false
 	}
 	
 //returns a string version of a file
 public String getFileContent (File file) throws FileNotFoundException, IOException
-{
+{  //read file
 	BufferedReader br = new BufferedReader(new FileReader(file));
+	//Create string version
 	StringBuilder sb = new StringBuilder();
 	String line = br.readLine();
-	while (line != null)
+	while (line != null) //loop till all lines are read
 	{
 		sb.append(line);
 		sb.append(System.lineSeparator());
-		line = br.readLine();
+		line = br.readLine(); //build string representation of lines
 	}
-	br.close();
-	return sb.toString();
+	br.close(); //close the reader
+	return sb.toString(); //return string builder as string
 }
 
 }
